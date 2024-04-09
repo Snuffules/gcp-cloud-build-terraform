@@ -1,0 +1,21 @@
+steps:
+  - id: 'tf init'
+    name: 'hashicorp/terraform:1.0.0'
+    entrypoint: sh
+    args: ["-c","terraform -chdir=GCP/create-solana-node init -upgrade "]
+  - id: 'tf plan'
+    name: 'hashicorp/terraform:1.0.0'
+    entrypoint: sh
+    args: ["-c","terraform -chdir=GCP/create-solana-node plan  -out=plan.out"]    
+  - id: 'tf apply'
+    name: 'hashicorp/terraform:1.0.0'
+    entrypoint: sh
+    args: ["-c","terraform -chdir=GCP/create-solana-node apply plan.out"]    
+  - id: 'tf destroy'
+    name: 'hashicorp/terraform:1.0.0'
+    entrypoint: sh
+    args: ["-c","terraform -chdir=GCP/create-solana-node plan -destroy -out=plan.out"]    
+  - id: 'tf destroy plan'
+    name: 'hashicorp/terraform:1.0.0'
+    entrypoint: sh
+    args: ["-c","terraform -chdir=GCP/create-solana-node apply plan.out"]    
