@@ -20,7 +20,7 @@ resource "google_project_service" "compute_service" {
 }
 resource "google_compute_instance" "vm_instance" {
   name         = "solana-node"
-  machine_type = "solana-node"
+  machine_type = "n2d-highmem-64"
 
   tags = ["solana-node"]
 
